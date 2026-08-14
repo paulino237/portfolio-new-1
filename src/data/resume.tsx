@@ -233,6 +233,24 @@ export const DATA = {
 
   projects: [
     {
+      title: "CAN Miss & Mister",
+      href: "https://canmissmister.com/",
+      dates: "2024",
+      active: true,
+      description:
+        "Official digital voting and contest platform for CAN Miss & Mister, celebrating African elegance, cultural heritage, and youth talent. Built with real-time candidate leaderboards, automated voting verification, and seamless mobile money payment integrations across Africa.",
+      technologies: ["React", "Next.js", "Node.js", "Mobile Money", "PostgreSQL"],
+      links: [
+        {
+          type: "Website",
+          href: "https://canmissmister.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "https://img.youtube.com/vi/DJ_xSey6XEQ/maxresdefault.jpg",
+      video: "https://youtu.be/DJ_xSey6XEQ",
+    },
+    {
       title: "NexusFlow",
       href: "#",
       dates: "2024",

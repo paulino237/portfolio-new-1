@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, Play, Pause, Volume2, VolumeX, Maximize, Loader2 } from "lucide-react";
 
 interface VideoModalProps {
@@ -20,6 +21,11 @@ export function VideoModal({
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on ESC
   useEffect(() => {
@@ -48,7 +54,7 @@ export function VideoModal({
     }
   }, [isOpen, videoUrl]);
 
-  if (!isOpen || !videoUrl) return null;
+  if (!mounted || !isOpen || !videoUrl) return null;
 
   const isEmbed =
     videoUrl.includes("youtube.com") ||
@@ -82,11 +88,11 @@ export function VideoModal({
 
   const getEmbedUrl = (url: string) => {
     if (url.includes("youtube.com/watch?v=")) {
-      return url.replace("watch?v=", "embed/") + "?autoplay=1";
+      return url.replace("watch?v=", "embed/") + "?autoplay=1&rel=0";
     }
     if (url.includes("youtu.be/")) {
       const id = url.split("youtu.be/")[1]?.split("?")[0];
-      return `https://www.youtube.com/embed/${id}?autoplay=1`;
+      return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
     }
     if (url.includes("loom.com/share/")) {
       return url.replace("/share/", "/embed/");
@@ -94,16 +100,16 @@ export function VideoModal({
     return url;
   };
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 lg:p-12 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8 bg-black/90 backdrop-blur-lg animate-in fade-in duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="video-modal-title"
     >
       <div
-        className="relative w-full max-w-6xl max-h-[92vh] bg-card border border-border/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200"
+        className="relative w-[96vw] max-w-[1400px] bg-card border border-border/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -116,18 +122,18 @@ export function VideoModal({
           </h3>
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            className="rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
             aria-label="Close modal"
           >
-            <X className="size-5" />
+            <X className="size-6" />
           </button>
         </div>
 
-        {/* Video Container */}
-        <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
+        {/* Video Container (Cinema Aspect Ratio & Huge Size) */}
+        <div className="relative aspect-video w-full max-h-[82vh] bg-black flex items-center justify-center overflow-hidden">
           {isLoading && !isEmbed && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/60 z-10">
-              <Loader2 className="size-8 animate-spin text-primary" />
+              <Loader2 className="size-10 animate-spin text-primary" />
             </div>
           )}
 
@@ -136,7 +142,7 @@ export function VideoModal({
               src={getEmbedUrl(videoUrl)}
               title={title}
               className="w-full h-full border-0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
           ) : (
@@ -153,11 +159,11 @@ export function VideoModal({
               />
 
               {/* Custom Controls Bar */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-between text-white opacity-0 hover:opacity-100 transition-opacity duration-200">
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex items-center justify-between text-white opacity-0 hover:opacity-100 transition-opacity duration-200">
                 <div className="flex items-center gap-3">
                   <button
                     onClick={togglePlay}
-                    className="p-2 rounded-lg hover:bg-white/20 transition-colors"
+                    className="p-2 rounded-lg hover:bg-white/20 transition-colors cursor-pointer"
                     aria-label={isPlaying ? "Pause" : "Play"}
                   >
                     {isPlaying ? (
@@ -168,7 +174,7 @@ export function VideoModal({
                   </button>
                   <button
                     onClick={toggleMute}
-                    className="p-2 rounded-lg hover:bg-white/20 transition-colors"
+                    className="p-2 rounded-lg hover:bg-white/20 transition-colors cursor-pointer"
                     aria-label={isMuted ? "Unmute" : "Mute"}
                   >
                     {isMuted ? (
@@ -180,7 +186,7 @@ export function VideoModal({
                 </div>
                 <button
                   onClick={handleFullscreen}
-                  className="p-2 rounded-lg hover:bg-white/20 transition-colors"
+                  className="p-2 rounded-lg hover:bg-white/20 transition-colors cursor-pointer"
                   aria-label="Fullscreen"
                 >
                   <Maximize className="size-5" />
@@ -192,4 +198,6 @@ export function VideoModal({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }

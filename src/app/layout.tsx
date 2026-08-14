@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
+  icons: {
+    icon: "/miguel-avatar.jpg",
+    shortcut: "/miguel-avatar.jpg",
+    apple: "/miguel-avatar.jpg",
+  },
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
@@ -56,6 +61,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,7 +76,7 @@ export default function RootLayout({
           geistMono.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="portfolio-theme">
           <TooltipProvider delayDuration={0}>
             <div className="absolute inset-0 top-0 left-0 right-0 h-[100px] overflow-hidden z-0">
               <FlickeringGrid

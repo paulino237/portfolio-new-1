@@ -6,9 +6,10 @@ import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
-import HackathonsSection from "@/components/section/hackathons-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
+import TestimonialsSection from "@/components/section/testimonials-section";
+import PaymentsSection from "@/components/section/payments-section";
 import { ArrowUpRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -26,11 +27,20 @@ export default function Page() {
                 yOffset={8}
                 text={`Hi, I'm ${DATA.name.split(" ")[0]}`}
               />
-              <BlurFadeText
-                className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
-                delay={BLUR_FADE_DELAY}
-                text={DATA.description}
-              />
+              <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <p className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl">
+                  Co-Founder{" "}
+                  <Link
+                    href="https://onixe.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-foreground hover:underline underline-offset-4"
+                  >
+                    @Onixe
+                  </Link>{" "}
+                  &amp; Tech Lead | Creator of Clairre &amp; 3AXIS
+                </p>
+              </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
               <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
@@ -71,17 +81,10 @@ export default function Page() {
             <h2 className="text-xl font-bold">Education</h2>
           </BlurFade>
           <div className="flex flex-col gap-8">
-            {DATA.education.map((education, index) => (
-              <BlurFade
-                key={education.school}
-                delay={BLUR_FADE_DELAY * 8 + index * 0.05}
-              >
-                <Link
-                  href={education.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-x-3 justify-between group"
-                >
+            {DATA.education.map((education, index) => {
+              const isLink = education.href && education.href !== "#";
+              const Content = (
+                <div className="flex items-center gap-x-3 justify-between group">
                   <div className="flex items-center gap-x-3 flex-1 min-w-0">
                     {education.logoUrl ? (
                       <img
@@ -90,12 +93,16 @@ export default function Page() {
                         className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
                       />
                     ) : (
-                      <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
+                      <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none flex items-center justify-center text-xs font-semibold text-muted-foreground">
+                        {education.school.charAt(0)}
+                      </div>
                     )}
                     <div className="flex-1 min-w-0 flex flex-col gap-0.5">
                       <div className="font-semibold leading-none flex items-center gap-2">
                         {education.school}
-                        <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" aria-hidden />
+                        {isLink && (
+                          <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" aria-hidden />
+                        )}
                       </div>
                       <div className="font-sans text-sm text-muted-foreground">
                         {education.degree}
@@ -107,9 +114,28 @@ export default function Page() {
                       {education.start} - {education.end}
                     </span>
                   </div>
-                </Link>
-              </BlurFade>
-            ))}
+                </div>
+              );
+
+              return (
+                <BlurFade
+                  key={education.school}
+                  delay={BLUR_FADE_DELAY * 8 + index * 0.05}
+                >
+                  {isLink ? (
+                    <Link
+                      href={education.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {Content}
+                    </Link>
+                  ) : (
+                    Content
+                  )}
+                </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -130,14 +156,19 @@ export default function Page() {
           </div>
         </div>
       </section>
+      <section id="payments">
+        <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
+          <PaymentsSection />
+        </BlurFade>
+      </section>
       <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 11}>
           <ProjectsSection />
         </BlurFade>
       </section>
-      <section id="hackathons">
+      <section id="testimonials">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <HackathonsSection />
+          <TestimonialsSection />
         </BlurFade>
       </section>
       <section id="contact">

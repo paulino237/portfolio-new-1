@@ -114,28 +114,40 @@ export const DATA = {
   work: [
     // Current positions
     {
-      company: "Mayo App",
-      href: "https://mayooapp.com",
-      badges: ["Current"],
-      location: "Remote · Cameroon",
-      title: "Lead Developer",
-      logoUrl: "/mayo-logo.png",
-      start: "June 2024",
-      end: "Present",
-      description:
-        "Lead development of the Mayo financial ecosystem, a fintech platform empowering 15,000+ users to earn, save, and manage money across all mobile money operators in Africa. Architecting Flutter mobile apps, Node.js/NestJS backend services, and real-time payment integrations including FlexiPay and mobile money APIs, while delivering the Mayo Store and Mission Million sub-products.",
-    },
-    {
       company: "Onixe",
       href: "https://onixe.app",
       badges: ["Co-Founder"],
       location: "Remote",
       title: "Co-Founder & Tech Lead",
       logoUrl: "",
-      start: "July 2024",
+      start: "June 2026",
       end: "Present",
       description:
         "Co-founded Onixe and lead the full technical vision. Architecting the product stack from the ground up, including Clairre, an AI-powered assistant, and overseeing all engineering decisions across the company's growing suite of tools.",
+    },
+    {
+      company: "Mayo App",
+      href: "https://mayooapp.com",
+      badges: ["Current"],
+      location: "Remote · Cameroon",
+      title: "Lead Developer",
+      logoUrl: "/mayo-logo.png",
+      start: "June 2026",
+      end: "Present",
+      description:
+        "Lead development of the Mayo financial ecosystem, a fintech platform empowering 15,000+ users to earn, save, and manage money across all mobile money operators in Africa. Architecting Flutter mobile apps, Node.js/NestJS backend services, and real-time payment integrations including FlexiPay and mobile money APIs, while delivering the Mayo Store and Mission Million sub-products.",
+    },
+    {
+      company: "Klavis AI",
+      href: "https://klavis.app",
+      badges: ["Current", "Freelance"],
+      location: "Remote",
+      title: "Full-Stack Engineer",
+      logoUrl: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fklavis-ai.png&w=256&q=75",
+      start: "January 2026",
+      end: "Present",
+      description:
+        "Building AI-powered case and legal analysis solutions at Klavis, developing robust backend services, AI pipeline integrations, and high-performance web interfaces.",
     },
     {
       company: "eScrutin",
@@ -144,7 +156,7 @@ export const DATA = {
       location: "Remote",
       title: "Lead Developer",
       logoUrl: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fescrutin.png&w=256&q=75",
-      start: "2023",
+      start: "August 2025",
       end: "Present",
       description:
         "Leading development of the eScrutin platform, a secure online voting solution that enables event organizers to create, monetize, and manage contests and elections at scale.",
@@ -163,16 +175,28 @@ export const DATA = {
     },
     // Past positions
     {
+      company: "SoSan Health",
+      href: "#",
+      badges: [],
+      location: "Remote",
+      title: "Full-Stack Developer",
+      logoUrl: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fsosan.png&w=256&q=75",
+      start: "January 2025",
+      end: "August 2025",
+      description:
+        "Full-stack development and optimization of the SoSan Health connected health application, handling medical appointments, patient records, medication reminders, and teleconsultations with healthcare professionals.",
+    },
+    {
       company: "Niovar Jobs",
       href: "#",
       badges: [],
       location: "Remote",
-      title: "Mobile Developer",
+      title: "Mobile & Full-Stack Developer",
       logoUrl: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fniovar.jpg&w=256&q=75",
-      start: "2023",
-      end: "2024",
+      start: "2021",
+      end: "December 2024",
       description:
-        "Built the Niovar Jobs mobile application, an intuitive job search platform featuring intelligent matching between candidates and job offers, real-time notifications, and a streamlined application interface.",
+        "My foundational software engineering role where I developed the Niovar Jobs mobile and web platform, implementing intelligent matching algorithms, push notifications, and high-performance job application flows.",
     },
     {
       company: "KBSL Consulting",
@@ -185,18 +209,6 @@ export const DATA = {
       end: "2023",
       description:
         "Built the full web platform for KBSL Consulting, enabling clients to discover coaching and consulting services, explore the company's four-step innovation methodology, and book free strategy sessions. Improved internal operational efficiency by 40%.",
-    },
-    {
-      company: "SoSan Health",
-      href: "#",
-      badges: [],
-      location: "Remote",
-      title: "Mobile Developer",
-      logoUrl: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fsosan.png&w=256&q=75",
-      start: "2022",
-      end: "2023",
-      description:
-        "Optimized and improved the SoSan Health connected health application, covering medical appointment booking, patient record access, medication reminders, and teleconsultation with healthcare professionals.",
     },
   ],
 
@@ -258,7 +270,7 @@ export const DATA = {
     },
     {
       title: "KLAVIS AI",
-      href: "#",
+      href: "https://klavis.app",
       dates: "2024",
       active: true,
       description:
@@ -267,7 +279,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "#",
+          href: "https://klavis.app",
           icon: <Icons.globe className="size-3" />,
         },
       ],

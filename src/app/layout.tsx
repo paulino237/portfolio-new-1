@@ -14,7 +14,8 @@ const kanit = Kanit({
 const siteDescription =
   "Senior Full-Stack Engineer, Tech Lead & Co-Founder @Onixe. Specializing in high-performance web applications, Flutter mobile apps, distributed backends (Node.js, .NET), and 3D web animations (3AXIS).";
 
-const avatarImageUrl = `${DATA.url}/miguel-avatar.jpg`;
+const avatarImageUrl =
+  "https://media.licdn.com/dms/image/v2/D4E03AQF_weOCsz3KzA/profile-displayphoto-scale_400_400/B4EZ925MFDHAAk-/0/1784406133387?e=1788998400&v=beta&t=tuKI0rlnFpyLNeaxJ1CCi_9UKUBZOUPCacFpQLjE5xk";
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),

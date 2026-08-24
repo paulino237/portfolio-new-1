@@ -14,6 +14,8 @@ const kanit = Kanit({
 const siteDescription =
   "Senior Full-Stack Engineer, Tech Lead & Co-Founder @Onixe. Specializing in high-performance web applications, Flutter mobile apps, distributed backends (Node.js, .NET), and 3D web animations (3AXIS).";
 
+const avatarImageUrl = `${DATA.url}/miguel-avatar.jpg`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
@@ -30,9 +32,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/miguel-avatar.jpg",
+        url: avatarImageUrl,
+        secureUrl: avatarImageUrl,
         width: 1200,
         height: 1200,
+        type: "image/jpeg",
         alt: `${DATA.name} - Senior Full-Stack Engineer`,
       },
     ],
@@ -41,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${DATA.name} — Senior Full-Stack Engineer & Tech Lead`,
     description: siteDescription,
-    images: ["/miguel-avatar.jpg"],
+    images: [avatarImageUrl],
     creator: "@miguelFosso",
   },
   robots: {
@@ -69,6 +73,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={kanit.variable}>
+      <head>
+        {/* Direct Meta tags for WhatsApp, Telegram and Social Crawlers */}
+        <meta property="og:image" content={avatarImageUrl} />
+        <meta property="og:image:secure_url" content={avatarImageUrl} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+        <meta property="og:image:alt" content={DATA.name} />
+        <meta name="twitter:image" content={avatarImageUrl} />
+        <link rel="image_src" href={avatarImageUrl} />
+      </head>
       <body className="bg-[#0C0C0C] text-[#D7E2EA] font-sans antialiased min-h-screen selection:bg-[#7621B0]/30 selection:text-white">
         {children}
       </body>

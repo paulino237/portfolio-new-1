@@ -23,45 +23,78 @@ const ROW2_IMAGES = [
   ...PROJECT_IMAGES.slice(midpoint),
 ];
 
-function DraggableRow({
+function AutoScrollRow({
   images,
-  initialScroll = 0,
+  speed = 1,
+  direction = "left",
 }: {
   images: string[];
-  initialScroll?: number;
+  speed?: number;
+  direction?: "left" | "right";
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
 
   useEffect(() => {
-    if (containerRef.current && initialScroll > 0) {
-      containerRef.current.scrollLeft = initialScroll;
+    let animationFrameId: number;
+
+    const autoScroll = () => {
+      if (containerRef.current && !isPaused && !isDraggingRef.current) {
+        const container = containerRef.current;
+        const maxScroll = container.scrollWidth / 2;
+
+        if (direction === "left") {
+          container.scrollLeft += speed;
+          if (container.scrollLeft >= maxScroll) {
+            container.scrollLeft -= maxScroll;
+          }
+        } else {
+          container.scrollLeft -= speed;
+          if (container.scrollLeft <= 0) {
+            container.scrollLeft += maxScroll;
+          }
+        }
+      }
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    animationFrameId = requestAnimationFrame(autoScroll);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isPaused, speed, direction]);
+
+  useEffect(() => {
+    if (containerRef.current && direction === "right") {
+      containerRef.current.scrollLeft = containerRef.current.scrollWidth / 4;
     }
-  }, [initialScroll]);
+  }, [direction]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - containerRef.current.offsetLeft);
-    setScrollLeft(containerRef.current.scrollLeft);
+    isDraggingRef.current = true;
+    setIsPaused(true);
+    startXRef.current = e.pageX - containerRef.current.offsetLeft;
+    scrollLeftRef.current = containerRef.current.scrollLeft;
   };
 
   const handleMouseLeave = () => {
-    setIsDragging(false);
+    isDraggingRef.current = false;
+    setIsPaused(false);
   };
 
   const handleMouseUp = () => {
-    setIsDragging(false);
+    isDraggingRef.current = false;
+    setIsPaused(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !containerRef.current) return;
+    if (!isDraggingRef.current || !containerRef.current) return;
     e.preventDefault();
     const x = e.pageX - containerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    containerRef.current.scrollLeft = scrollLeft - walk;
+    const walk = (x - startXRef.current) * 1.5;
+    containerRef.current.scrollLeft = scrollLeftRef.current - walk;
   };
 
   return (
@@ -71,7 +104,10 @@ function DraggableRow({
       onMouseLeave={handleMouseLeave}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      className="flex gap-4 overflow-x-auto select-none no-scrollbar cursor-grab active:cursor-grabbing w-full py-2 scroll-smooth"
+      onMouseEnter={() => setIsPaused(true)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+      className="flex gap-4 overflow-x-auto select-none no-scrollbar cursor-grab active:cursor-grabbing w-full py-2"
       style={{
         scrollbarWidth: "none",
         msOverflowStyle: "none",
@@ -95,11 +131,11 @@ export function MarqueeSection() {
   return (
     <section className="bg-[#0C0C0C] pt-20 sm:pt-28 md:pt-36 pb-12 overflow-hidden w-full select-none">
       <div className="flex flex-col gap-4 w-full">
-        {/* Row 1 - Interactive Drag & Scroll */}
-        <DraggableRow images={ROW1_IMAGES} initialScroll={80} />
+        {/* Row 1 - Auto-scrolls LEFT & Draggable */}
+        <AutoScrollRow images={ROW1_IMAGES} speed={1.2} direction="left" />
 
-        {/* Row 2 - Interactive Drag & Scroll */}
-        <DraggableRow images={ROW2_IMAGES} initialScroll={500} />
+        {/* Row 2 - Auto-scrolls RIGHT & Draggable */}
+        <AutoScrollRow images={ROW2_IMAGES} speed={1.2} direction="right" />
       </div>
     </section>
   );

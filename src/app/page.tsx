@@ -6,6 +6,7 @@ import { MarqueeSection } from "@/components/jack/MarqueeSection";
 import { AboutSection } from "@/components/jack/AboutSection";
 import { SkillsSection } from "@/components/jack/SkillsSection";
 import { ProjectsSection } from "@/components/jack/ProjectsSection";
+import { FooterSection } from "@/components/jack/FooterSection";
 
 export default function Page() {
   return (
@@ -15,6 +16,7 @@ export default function Page() {
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
+      <FooterSection />
     </main>
   );
 }

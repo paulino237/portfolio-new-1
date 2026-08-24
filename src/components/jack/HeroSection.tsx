@@ -42,7 +42,7 @@ export function HeroSection() {
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "mailto:cocdog11@gmail.com" },
   ];
 
   const currentPhrase = HERO_PHRASES[activePhraseIndex];
@@ -156,7 +156,7 @@ export function HeroSection() {
           </FadeIn>
 
           <FadeIn delay={0.5} y={20} duration={0.7}>
-            <ContactButton href="#contact" />
+            <ContactButton href="mailto:cocdog11@gmail.com" />
           </FadeIn>
         </div>
       </section>

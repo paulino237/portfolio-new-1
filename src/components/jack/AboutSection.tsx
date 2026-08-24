@@ -87,7 +87,7 @@ export function AboutSection() {
         {/* Contact Button */}
         <div className="mt-16 sm:mt-20 md:mt-24">
           <FadeIn delay={0.2} y={20} duration={0.7}>
-            <ContactButton href="#contact" />
+            <ContactButton href="mailto:cocdog11@gmail.com" />
           </FadeIn>
         </div>
       </div>

@@ -75,7 +75,7 @@ export const DATA = {
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
   ],
   contact: {
-    email: "miguelfoosso237@gmail.com",
+    email: "cocdog11@gmail.com",
     tel: "+237000000000",
     social: {
       GitHub: {
@@ -104,7 +104,7 @@ export const DATA = {
       },
       email: {
         name: "Send Email",
-        url: "mailto:miguelfoosso237@gmail.com",
+        url: "mailto:cocdog11@gmail.com",
         icon: Icons.email,
         navbar: false,
       },
@@ -119,7 +119,7 @@ export const DATA = {
       badges: ["Co-Founder"],
       location: "Remote",
       title: "Co-Founder & Tech Lead",
-      logoUrl: "",
+      logoUrl: "/onixe.png",
       start: "June 2026",
       end: "Present",
       description:
@@ -233,6 +233,78 @@ export const DATA = {
 
   projects: [
     {
+      title: "Master Couturier RDC",
+      href: "https://vote.mastercouturerdc.com/",
+      dates: "2024",
+      active: true,
+      description:
+        "Digital voting and candidate scoring platform for the prestigious Master Couturier RDC fashion competition, celebrating haute couture and tailoring talent in DR Congo.",
+      technologies: ["React", "Next.js", "Node.js", "Mobile Money", "PostgreSQL"],
+      links: [
+        {
+          type: "Website",
+          href: "https://vote.mastercouturerdc.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/mastercourutrerdc.png",
+      video: "",
+    },
+    {
+      title: "Onixe",
+      href: "https://onixe.app",
+      dates: "2024 - Present",
+      active: true,
+      description:
+        "Digital product studio & software ecosystem building cutting-edge web, mobile, and AI solutions for startups and enterprises worldwide.",
+      technologies: ["React", "Next.js", "Node.js", "AI/ML", "Flutter", "TypeScript"],
+      links: [
+        {
+          type: "Website",
+          href: "https://onixe.app",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/onixe.png",
+      video: "",
+    },
+    {
+      title: "Mayo App Mobile",
+      href: "https://play.google.com/store/apps/details?id=com.mayocustomer.app&hl=fr",
+      dates: "2024 - Present",
+      active: true,
+      description:
+        "Fintech mobile ecosystem empowering 15,000+ users to earn, save, and manage money across all mobile money operators in Africa with real-time payment integrations.",
+      technologies: ["Flutter", "Dart", "Node.js", "NestJS", "Fintech", "Mobile Money"],
+      links: [
+        {
+          type: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.mayocustomer.app&hl=fr",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/mayoappmobile.png",
+      video: "",
+    },
+    {
+      title: "Mission Million",
+      href: "https://app.mayooapp.com/mission-million/login",
+      dates: "2024",
+      active: true,
+      description:
+        "Gamified financial and rewards platform within the Mayo ecosystem, empowering users to complete missions, earn rewards, and grow their savings.",
+      technologies: ["React", "Next.js", "Node.js", "NestJS", "PostgreSQL", "Fintech"],
+      links: [
+        {
+          type: "Website",
+          href: "https://app.mayooapp.com/mission-million/login",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/missionmillion.png",
+      video: "",
+    },
+    {
       title: "CAN Miss & Mister",
       href: "https://canmissmister.com/",
       dates: "2024",
@@ -247,7 +319,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "https://img.youtube.com/vi/DJ_xSey6XEQ/maxresdefault.jpg",
+      image: "/cannmister.png",
       video: "https://youtu.be/DJ_xSey6XEQ",
     },
     {
@@ -306,7 +378,7 @@ export const DATA = {
     },
     {
       title: "eScrutin",
-      href: "#",
+      href: "https://www.escrutin.net/",
       dates: "2023",
       active: true,
       description:
@@ -315,16 +387,16 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "#",
+          href: "https://www.escrutin.net/",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fescrutin.png&w=3840&q=75",
+      image: "/escrutin.png",
       video: "",
     },
     {
       title: "House of Challenge",
-      href: "#",
+      href: "https://houseofchallenge.org/en",
       dates: "2023",
       active: true,
       description:
@@ -333,16 +405,16 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "#",
+          href: "https://houseofchallenge.org/en",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fhoc.png&w=3840&q=75",
+      image: "/houseofchallenge.png",
       video: "",
     },
     {
       title: "La Villa des Immatures",
-      href: "#",
+      href: "https://lmi.escrutin.live/",
       dates: "2023",
       active: true,
       description:
@@ -351,7 +423,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "#",
+          href: "https://lmi.escrutin.live/",
           icon: <Icons.globe className="size-3" />,
         },
       ],
@@ -377,8 +449,8 @@ export const DATA = {
       video: "",
     },
     {
-      title: "Cerveau d'Afrique",
-      href: "#",
+      title: "Cerveau d'Afrique (Africa Fox Experience)",
+      href: "https://cerveaudafrique.com/",
       dates: "2023",
       active: true,
       description:
@@ -387,7 +459,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "#",
+          href: "https://cerveaudafrique.com/",
           icon: <Icons.globe className="size-3" />,
         },
       ],
@@ -432,7 +504,7 @@ export const DATA = {
     },
     {
       title: "Ongoo",
-      href: "#",
+      href: "https://ongoo.cm",
       dates: "2023",
       active: true,
       description:
@@ -441,11 +513,11 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "#",
+          href: "https://ongoo.cm",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fongoo.png&w=3840&q=75",
+      image: "/ongoo.png",
       video: "",
     },
     {
@@ -486,7 +558,7 @@ export const DATA = {
     },
     {
       title: "SoSan Health",
-      href: "#",
+      href: "https://play.google.com/store/search?q=sosan&c=apps&hl=fr",
       dates: "2022",
       active: true,
       description:
@@ -494,12 +566,12 @@ export const DATA = {
       technologies: ["Flutter", "Firebase", "Node.js"],
       links: [
         {
-          type: "Website",
-          href: "#",
+          type: "Play Store",
+          href: "https://play.google.com/store/search?q=sosan&c=apps&hl=fr",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "https://myportfolio-tan-zeta.vercel.app/_next/image?url=%2Fimages%2Fprojects%2Fsosan.png&w=3840&q=75",
+      image: "/sosan.png",
       video: "",
     },
     {

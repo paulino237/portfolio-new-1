@@ -11,7 +11,7 @@ interface ContactButtonProps {
 }
 
 export function ContactButton({
-  href = "#contact",
+  href = "mailto:cocdog11@gmail.com",
   onClick,
   className = "",
   label = "Contact Me",

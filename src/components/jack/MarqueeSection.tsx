@@ -2,106 +2,104 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-const GIF_IMAGES = [
-  "https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif",
-  "https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif",
-  "https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif",
-  "https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif",
-  "https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif",
-  "https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif",
-  "https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif",
-  "https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif",
-  "https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif",
-  "https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif",
-  "https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif",
-  "https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif",
-  "https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif",
-  "https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif",
-  "https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif",
-  "https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif",
-  "https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif",
-  "https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif",
-  "https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif",
-  "https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif",
+import { PROJECTS } from "./ProjectsSection";
+import { ShimmerImage } from "./ShimmerImage";
+
+const PROJECT_IMAGES = PROJECTS.flatMap((p) => [
+  p.images.main,
+  ...(p.images.sub1 ? [p.images.sub1] : []),
+  ...(p.images.sub2 ? [p.images.sub2] : []),
+]).filter((img): img is string => Boolean(img));
+
+const midpoint = Math.ceil(PROJECT_IMAGES.length / 2);
+const ROW1_IMAGES = [
+  ...PROJECT_IMAGES.slice(0, midpoint),
+  ...PROJECT_IMAGES.slice(0, midpoint),
+  ...PROJECT_IMAGES.slice(0, midpoint),
+];
+const ROW2_IMAGES = [
+  ...PROJECT_IMAGES.slice(midpoint),
+  ...PROJECT_IMAGES.slice(midpoint),
+  ...PROJECT_IMAGES.slice(midpoint),
 ];
 
-const ROW1_IMAGES = [...GIF_IMAGES.slice(0, 11), ...GIF_IMAGES.slice(0, 11), ...GIF_IMAGES.slice(0, 11)];
-const ROW2_IMAGES = [...GIF_IMAGES.slice(11), ...GIF_IMAGES.slice(11), ...GIF_IMAGES.slice(11)];
-
-export function MarqueeSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [offset, setOffset] = useState(0);
+function DraggableRow({
+  images,
+  initialScroll = 0,
+}: {
+  images: string[];
+  initialScroll?: number;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const sectionTop = window.scrollY + rect.top;
-      const scrollOffset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
-      setOffset(scrollOffset);
-    };
+    if (containerRef.current && initialScroll > 0) {
+      containerRef.current.scrollLeft = initialScroll;
+    }
+  }, [initialScroll]);
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden w-full select-none"
+    <div
+      ref={containerRef}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={handleMouseLeave}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+      className="flex gap-4 overflow-x-auto select-none no-scrollbar cursor-grab active:cursor-grabbing w-full py-2 scroll-smooth"
+      style={{
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
     >
-      <div className="flex flex-col gap-3 w-full">
-        {/* Row 1 - Moves RIGHT on scroll */}
-        <div
-          className="flex gap-3 will-change-transform"
-          style={{
-            transform: `translate3d(${offset - 200}px, 0, 0)`,
-          }}
-        >
-          {ROW1_IMAGES.map((src, idx) => (
-            <div
-              key={`row1-${idx}`}
-              className="w-[420px] h-[270px] flex-shrink-0 rounded-2xl overflow-hidden bg-neutral-900 border border-white/5 shadow-md"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
-                alt="3D Project Preview"
-                loading="lazy"
-                className="w-full h-full object-cover"
-                draggable={false}
-              />
-            </div>
-          ))}
-        </div>
+      <div className="flex gap-4 flex-nowrap shrink-0 px-4 sm:px-6">
+        {images.map((src, idx) => (
+          <div
+            key={`img-${idx}`}
+            className="w-[320px] sm:w-[420px] md:w-[480px] h-[220px] sm:h-[280px] md:h-[320px] flex-shrink-0 rounded-2xl overflow-hidden bg-neutral-900 border border-white/5 shadow-md hover:border-white/20 transition-colors"
+          >
+            <ShimmerImage src={src} alt="Project Preview" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-        {/* Row 2 - Moves LEFT on scroll */}
-        <div
-          className="flex gap-3 will-change-transform"
-          style={{
-            transform: `translate3d(${-(offset - 200)}px, 0, 0)`,
-          }}
-        >
-          {ROW2_IMAGES.map((src, idx) => (
-            <div
-              key={`row2-${idx}`}
-              className="w-[420px] h-[270px] flex-shrink-0 rounded-2xl overflow-hidden bg-neutral-900 border border-white/5 shadow-md"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
-                alt="3D Project Preview"
-                loading="lazy"
-                className="w-full h-full object-cover"
-                draggable={false}
-              />
-            </div>
-          ))}
-        </div>
+export function MarqueeSection() {
+  return (
+    <section className="bg-[#0C0C0C] pt-20 sm:pt-28 md:pt-36 pb-12 overflow-hidden w-full select-none">
+      <div className="flex flex-col gap-4 w-full">
+        {/* Row 1 - Interactive Drag & Scroll */}
+        <DraggableRow images={ROW1_IMAGES} initialScroll={80} />
+
+        {/* Row 2 - Interactive Drag & Scroll */}
+        <DraggableRow images={ROW2_IMAGES} initialScroll={500} />
       </div>
     </section>
   );

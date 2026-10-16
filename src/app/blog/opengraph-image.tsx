@@ -161,7 +161,7 @@ export default async function Image() {
             }
         );
     } catch (error) {
-        console.error("Error generating OpenGraph image:", error);
+        console.error("Erro generating OpenGraph image:", error);
         return new Response(
             `Failed to generate image: ${error instanceof Error ? error.message : "Unknown error"}`,
             {

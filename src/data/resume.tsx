@@ -45,7 +45,7 @@ export const DATA = {
     "Co-Founder @Onixe & Tech Lead | Creator of Clairre & 3AXIS",
   summary:
     "I build software that ships and scales. Over the past **4+ years**, I've led development on a fintech platform used by **15,000+ people** across Africa, co-founded [Onixe](https://onixe.app), and delivered **20+ production apps** spanning web, mobile, and AI. My stack is deep: **Flutter**, **React / Next.js**, **Node.js / NestJS**, **.NET**, and I've integrated more payment gateways than most developers have heard of. I also built [3Axis](https://www.npmjs.com/package/3axis), my own npm package for 3D animations on the web. If you need someone who writes clean code, makes sharp architectural decisions, and actually delivers, **let's talk**.",
-  avatarUrl: "/miguel-avatar.jpg",
+  avatarUrl: "/miguel-avatar.webp",
   skills: [
     // Frontend
     { name: "React", icon: ReactLight },
@@ -119,7 +119,7 @@ export const DATA = {
       badges: ["Co-Founder"],
       location: "Remote",
       title: "Co-Founder & Tech Lead",
-      logoUrl: "/onixe.png",
+      logoUrl: "/onixe.webp",
       start: "June 2026",
       end: "Present",
       description:
@@ -131,7 +131,7 @@ export const DATA = {
       badges: ["Current"],
       location: "Remote · Cameroon",
       title: "Lead Developer",
-      logoUrl: "/mayo-logo.png",
+      logoUrl: "/mayo-logo.webp",
       start: "June 2026",
       end: "Present",
       description:
@@ -167,7 +167,7 @@ export const DATA = {
       badges: ["Available"],
       location: "Remote",
       title: "Full-Stack & Mobile Engineer",
-      logoUrl: "/miguel-avatar.jpg",
+      logoUrl: "/miguel-avatar.webp",
       start: "2020",
       end: "Present",
       description:
@@ -233,6 +233,24 @@ export const DATA = {
 
   projects: [
     {
+      title: "NBIKO TV",
+      href: "https://nbiko.escrutin.live/",
+      dates: "2024 - Present",
+      active: true,
+      description:
+        "Digital streaming and video-on-demand (VOD) media platform celebrating African talent and culture. Features live broadcasting, interactive episode carousel, multi-category catalogues, and adaptive video streaming.",
+      technologies: ["Next.js", "React", "Video Streaming", "VOD", "Node.js", "Tailwind CSS"],
+      links: [
+        {
+          type: "Website",
+          href: "https://nbiko.escrutin.live/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/nbiko-tv.png",
+      video: "",
+    },
+    {
       title: "Master Couturier RDC",
       href: "https://vote.mastercouturerdc.com/",
       dates: "2024",
@@ -247,7 +265,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/mastercourutrerdc.png",
+      image: "/mastercourutrerdc.webp",
       video: "",
     },
     {
@@ -265,7 +283,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/onixe.png",
+      image: "/onixe.webp",
       video: "",
     },
     {
@@ -283,7 +301,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/mayoappmobile.png",
+      image: "/mayoappmobile.webp",
       video: "",
     },
     {
@@ -301,7 +319,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/missionmillion.png",
+      image: "/missionmillion.webp",
       video: "",
     },
     {
@@ -319,7 +337,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/cannmister.png",
+      image: "/cannmister.webp",
       video: "https://youtu.be/DJ_xSey6XEQ",
     },
     {
@@ -391,7 +409,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/escrutin.png",
+      image: "/escrutin.webp",
       video: "",
     },
     {
@@ -409,7 +427,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/houseofchallenge.png",
+      image: "/houseofchallenge.webp",
       video: "",
     },
     {
@@ -517,7 +535,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/ongoo.png",
+      image: "/ongoo.webp",
       video: "",
     },
     {
@@ -571,7 +589,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/sosan.png",
+      image: "/sosan.webp",
       video: "",
     },
     {

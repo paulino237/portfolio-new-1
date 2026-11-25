@@ -19,6 +19,13 @@ const glockGrotesque = localFont({
 
 const SHOWCASE_TEMPLATES = [
   {
+    id: "circular",
+    title: "Circular Platform",
+    category: "Analytics & SaaS",
+    tag: "High Performance",
+    image: "/unpaidui/showcase-circular.webp",
+  },
+  {
     id: "arclight",
     title: "Arclight Workspace",
     category: "Productivity & SaaS",

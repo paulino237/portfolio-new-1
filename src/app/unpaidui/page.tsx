@@ -19,6 +19,13 @@ const glockGrotesque = localFont({
 
 const SHOWCASE_TEMPLATES = [
   {
+    id: "aldena",
+    title: "Aldena Studio",
+    category: "Creative Agency",
+    tag: "Brand Identity",
+    image: "/unpaidui/showcase-aldena.webp",
+  },
+  {
     id: "pixelpush",
     title: "Pixelpush Studio",
     category: "AI Video & Creator",
@@ -182,45 +189,45 @@ export default function UnpaidUIPage() {
         {/* ----------------- CENTER STAGE & SURROUNDING CARDS ----------------- */}
         <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-4">
 
-          {/* LEFT CARDS — slide in from left with stagger */}
+          {/* LEFT CARDS — slide in from left with stagger (all 5 always visible) */}
           {[
-            { top: "10%", left: "4%", src: "/unpaidui/showcase-ostra.webp", alt: "Studio Ostra", size: "lg:w-48", delay: 0.5, hidden: "sm" },
-            { top: "32%", left: "3%", src: "/unpaidui/template-1.webp", alt: "Nexbot Cortex", size: "lg:w-44", delay: 0.65, hidden: "md" },
-            { top: "54%", left: "3.5%", src: "/unpaidui/showcase-wellnest.webp", alt: "Wellnest Health", size: "lg:w-44", delay: 0.8, hidden: "md" },
-            { top: undefined, bottom: "8%", left: "4%", src: "/unpaidui/showcase-kraft.webp", alt: "KRAFT AI", size: "lg:w-48", delay: 0.95, hidden: "sm" },
-            { top: undefined, bottom: "16%", left: "18%", src: "/unpaidui/template-4.webp", alt: "Lumen Scale", size: "lg:w-44", delay: 1.1, hidden: "lg" },
-          ].map(({ top, bottom, left, src, alt, size, delay, hidden }) => (
+            { top: "8%", left: "3%", src: "/unpaidui/showcase-ostra.webp", alt: "Studio Ostra", delay: 0.4 },
+            { top: "29%", left: "1.5%", src: "/unpaidui/template-1.webp", alt: "Nexbot Cortex", delay: 0.55 },
+            { top: "50%", left: "2.5%", src: "/unpaidui/showcase-wellnest.webp", alt: "Wellnest Health", delay: 0.7 },
+            { top: undefined, bottom: "7%", left: "3%", src: "/unpaidui/showcase-kraft.webp", alt: "KRAFT AI", delay: 0.85 },
+            { top: undefined, bottom: "16%", left: "15%", src: "/unpaidui/template-4.webp", alt: "Lumen Scale", delay: 1.0 },
+          ].map(({ top, bottom, left, src, alt, delay }) => (
             <motion.div
               key={alt}
-              className={`absolute z-10 hidden ${hidden}:block`}
+              className="absolute z-10 block"
               style={{ top, bottom, left }}
               initial={{ x: -60, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }}
             >
-              <div className={`relative w-24 sm:w-32 md:w-40 ${size} aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-white/20 transition-all duration-300 hover:scale-110 hover:z-30 cursor-pointer`}>
+              <div className="relative w-20 sm:w-28 md:w-36 lg:w-44 xl:w-48 aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-white/20 transition-all duration-300 hover:scale-110 hover:z-30 cursor-pointer">
                 <Image src={src} alt={alt} fill className="object-cover object-center" />
               </div>
             </motion.div>
           ))}
 
-          {/* RIGHT CARDS — slide in from right with stagger */}
+          {/* RIGHT CARDS — slide in from right with stagger (all 5 always visible) */}
           {[
-            { top: "10%", right: "4%", src: "/unpaidui/showcase-kora.webp", alt: "Kora Growth", size: "lg:w-48", delay: 0.5, hidden: "sm" },
-            { top: "32%", right: "3%", src: "/unpaidui/template-2.webp", alt: "3D Kinetic Carousel", size: "lg:w-44", delay: 0.65, hidden: "md" },
-            { top: "54%", right: "3.5%", src: "/unpaidui/template-3.webp", alt: "TLDR Digest", size: "lg:w-44", delay: 0.8, hidden: "md" },
-            { top: undefined, bottom: "8%", right: "4%", src: "/unpaidui/showcase-mindscript.webp", alt: "MindScript Health", size: "lg:w-48", delay: 0.95, hidden: "sm" },
-            { top: undefined, bottom: "16%", right: "18%", src: "/unpaidui/showcase-skyagent.webp", alt: "SkyAgent Assistant", size: "lg:w-44", delay: 1.1, hidden: "lg" },
-          ].map(({ top, bottom, right, src, alt, size, delay, hidden }) => (
+            { top: "8%", right: "3%", src: "/unpaidui/showcase-kora.webp", alt: "Kora Growth", delay: 0.4 },
+            { top: "29%", right: "1.5%", src: "/unpaidui/template-2.webp", alt: "3D Kinetic Carousel", delay: 0.55 },
+            { top: "50%", right: "2.5%", src: "/unpaidui/template-3.webp", alt: "TLDR Digest", delay: 0.7 },
+            { top: undefined, bottom: "7%", right: "3%", src: "/unpaidui/showcase-mindscript.webp", alt: "MindScript Health", delay: 0.85 },
+            { top: undefined, bottom: "16%", right: "15%", src: "/unpaidui/showcase-skyagent.webp", alt: "SkyAgent Assistant", delay: 1.0 },
+          ].map(({ top, bottom, right, src, alt, delay }) => (
             <motion.div
               key={alt}
-              className={`absolute z-10 hidden ${hidden}:block`}
+              className="absolute z-10 block"
               style={{ top, bottom, right }}
               initial={{ x: 60, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }}
             >
-              <div className={`relative w-24 sm:w-32 md:w-40 ${size} aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-white/20 transition-all duration-300 hover:scale-110 hover:z-30 cursor-pointer`}>
+              <div className="relative w-20 sm:w-28 md:w-36 lg:w-44 xl:w-48 aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-white/20 transition-all duration-300 hover:scale-110 hover:z-30 cursor-pointer">
                 <Image src={src} alt={alt} fill className="object-cover object-center" />
               </div>
             </motion.div>

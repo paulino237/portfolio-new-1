@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import React, { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { FadeIn } from "./FadeIn";
-import { LiveProjectButton } from "./LiveProjectButton";
 import { ShimmerImage } from "./ShimmerImage";
 
-interface ProjectItem {
+export interface ProjectItem {
   number: string;
   category: string;
   name: string;
@@ -156,137 +155,119 @@ export const PROJECTS: ProjectItem[] = [
   },
 ];
 
-function Card({
-  project,
-  index,
-  totalCards,
-  progress,
-  range,
-  targetScale,
-}: {
-  project: ProjectItem;
-  index: number;
-  totalCards: number;
-  progress: MotionValue<number>;
-  range: [number, number];
-  targetScale: number;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scale = useTransform(progress, range, [1, targetScale]);
-  const hasSubImages = Boolean(project.images.sub1 && project.images.sub2);
-
-  return (
-    <div
-      ref={containerRef}
-      className="min-h-[85vh] flex items-start justify-center sticky top-20 sm:top-24 md:top-28"
-    >
-      <motion.div
-        style={{
-          scale,
-          top: `calc(${index * 24}px)`,
-        }}
-        className="relative w-full rounded-[28px] sm:rounded-[36px] md:rounded-[44px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-5 sm:p-7 md:p-9 flex flex-col gap-5 sm:gap-7 shadow-2xl origin-top"
-      >
-        {/* Top Row: Number, Category, Name, and Live Project Button */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-3 border-b border-white/10">
-          <div className="flex items-baseline gap-4 sm:gap-6 md:gap-8">
-            <span
-              className="font-black text-[#D7E2EA] leading-none"
-              style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
-            >
-              {project.number}
-            </span>
-            <div className="flex flex-col">
-              <span className="text-[#D7E2EA]/60 uppercase tracking-widest text-xs sm:text-sm font-medium">
-                {project.category}
-              </span>
-              <h3 className="text-[#D7E2EA] uppercase font-medium text-base sm:text-xl md:text-2xl tracking-tight">
-                {project.name}
-              </h3>
-            </div>
-          </div>
-
-          <LiveProjectButton href={project.href} />
-        </div>
-
-        {/* Main Photo Banner on Top - Generous Height with Shimmer */}
-        <div
-          className={`w-full overflow-hidden rounded-lg bg-neutral-900 border border-white/10 ${
-            hasSubImages
-              ? "h-[260px] sm:h-[360px] md:h-[440px]"
-              : "h-[320px] sm:h-[440px] md:h-[540px]"
-          }`}
-        >
-          <ShimmerImage
-            src={project.images.main}
-            alt={`${project.name} main preview`}
-          />
-        </div>
-
-        {/* Optional Sub-Images at Bottom if available */}
-        {hasSubImages && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
-            <div className="w-full overflow-hidden rounded-lg bg-neutral-900 border border-white/10 h-[160px] sm:h-[220px] md:h-[260px]">
-              <ShimmerImage
-                src={project.images.sub1!}
-                alt={`${project.name} preview 1`}
-              />
-            </div>
-
-            <div className="w-full overflow-hidden rounded-lg bg-neutral-900 border border-white/10 h-[160px] sm:h-[220px] md:h-[260px]">
-              <ShimmerImage
-                src={project.images.sub2!}
-                alt={`${project.name} preview 2`}
-              />
-            </div>
-          </div>
-        )}
-      </motion.div>
-    </div>
-  );
-}
-
 export function ProjectsSection() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const [showAll, setShowAll] = useState(false);
+  const displayedProjects = showAll ? PROJECTS : PROJECTS.slice(0, 6);
 
   return (
     <section
       id="projects"
-      ref={containerRef}
-      className="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative pt-20 sm:pt-28 md:pt-36 pb-24 px-4 sm:px-6 md:px-10"
+      className="bg-[#0C0C0C] z-10 relative pt-20 sm:pt-28 md:pt-36 pb-28 sm:pb-36 px-4 sm:px-6 md:px-10"
     >
-      <div className="max-w-6xl mx-auto flex flex-col">
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
+
         {/* Heading */}
-        <FadeIn delay={0} y={40} duration={0.8}>
+        <FadeIn delay={0.1} y={24} duration={0.6}>
           <h2
-            className="hero-heading font-black uppercase text-center tracking-tight leading-none mb-16 sm:mb-24 md:mb-32"
-            style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+            className="text-white font-black uppercase text-center tracking-tight leading-[0.94] sm:leading-[0.92]"
+            style={{ fontSize: "clamp(2.5rem, 8.5vw, 130px)" }}
           >
-            Project
+            Design That<br />
+            Drives Results
           </h2>
         </FadeIn>
 
-        {/* Sticky Stacking Cards */}
-        <div className="flex flex-col w-full relative">
-          {PROJECTS.map((project, i) => {
-            const targetScale = 1 - (PROJECTS.length - 1 - i) * 0.03;
-            return (
-              <Card
-                key={project.number}
-                project={project}
-                index={i}
-                totalCards={PROJECTS.length}
-                progress={scrollYProgress}
-                range={[i * (1 / PROJECTS.length), 1]}
-                targetScale={targetScale}
-              />
-            );
-          })}
+        {/* Subtitle */}
+        <FadeIn delay={0.2} y={20} duration={0.6}>
+          <p className="text-neutral-400 text-sm sm:text-base md:text-lg text-center mt-5 max-w-xl mx-auto leading-relaxed">
+            Hand-picked projects built for real brands, real goals, real growth.
+          </p>
+        </FadeIn>
+
+        {/* Structured 3-Column Grid with 1px border dividers */}
+        <div className="mt-14 sm:mt-18 md:mt-20 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/[0.12] bg-[#0C0C0C]">
+            {displayedProjects.map((project, idx) => {
+              const CardContent = (
+                <div className="group h-full flex flex-col justify-between bg-[#0A0A0A]/40 hover:bg-white/[0.02] transition-colors duration-300 cursor-pointer">
+                  {/* Top Image Preview Container */}
+                  <div className="p-5 sm:p-7 md:p-8 pb-4">
+                    <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-[#141414] border border-white/[0.06]">
+                      <ShimmerImage
+                        src={project.images.main}
+                        alt={`${project.name} preview`}
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bottom Metadata & Arrow Action */}
+                  <div className="px-5 sm:px-7 md:px-8 pb-5 sm:pb-7 md:pb-8 pt-2 flex items-center justify-between gap-4">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-white font-medium text-base sm:text-lg tracking-tight truncate group-hover:text-white transition-colors">
+                        {project.name}
+                      </h3>
+                      <p className="text-neutral-400 text-xs sm:text-sm font-normal mt-0.5 truncate">
+                        {project.category}
+                      </p>
+                    </div>
+
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/[0.12] bg-white/[0.03] flex items-center justify-center text-neutral-400 group-hover:text-white group-hover:border-white/40 group-hover:bg-white/10 group-hover:scale-105 transition-all duration-300 shrink-0">
+                      <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
+                  </div>
+                </div>
+              );
+
+              return (
+                <FadeIn
+                  key={project.number}
+                  delay={0.05 * (idx % 6)}
+                  y={20}
+                  duration={0.5}
+                  className="border-r border-b border-white/[0.12]"
+                >
+                  {project.href ? (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block h-full focus:outline-none"
+                    >
+                      {CardContent}
+                    </a>
+                  ) : (
+                    CardContent
+                  )}
+                </FadeIn>
+              );
+            })}
+          </div>
         </div>
+
+        {/* View All / View Less Toggle Button */}
+        {PROJECTS.length > 6 && (
+          <FadeIn delay={0.2} y={20} duration={0.5}>
+            <div className="mt-12 sm:mt-14 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAll(!showAll)}
+                className="px-6 py-3 rounded-full border border-white/[0.15] bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-white text-sm font-medium tracking-wide transition-all duration-300 flex items-center gap-2 group cursor-pointer"
+              >
+                <span>
+                  {showAll
+                    ? "Show Less"
+                    : `View All Projects (${PROJECTS.length})`}
+                </span>
+                <ArrowUpRight
+                  className={`w-4 h-4 text-neutral-400 group-hover:text-white transition-transform duration-300 ${
+                    showAll ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div>
+          </FadeIn>
+        )}
       </div>
     </section>
   );

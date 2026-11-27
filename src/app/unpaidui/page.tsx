@@ -19,6 +19,13 @@ const glockGrotesque = localFont({
 
 const SHOWCASE_TEMPLATES = [
   {
+    id: "sentinel",
+    title: "Sentinel Cyber",
+    category: "Cybersecurity & AI",
+    tag: "Enterprise",
+    image: "/unpaidui/showcase-sentinel.webp",
+  },
+  {
     id: "circular",
     title: "Circular Platform",
     category: "Analytics & SaaS",
